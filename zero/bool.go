@@ -56,11 +56,11 @@ func NewBoolFromString(s string, valid bool) Bool {
 // BoolFromPtr creates a new Bool that be null if b is nil.
 func BoolFromString(s string) Bool {
 	if s == "" {
-		return NewBool(false, false)
+		return NewBool(false, true)
 	}
-	if s == "1" || s == "true" {
+	if s == "1" || s == "true" || s == "True" || s == "TRUE" {
 		return NewBool(true, true)
-	} else if s == "0" || s == "false" {
+	} else if s == "0" || s == "false" || s == "False" || s == "FALSE" {
 		return NewBool(false, true)
 	}
 	return NewBool(false, false)
@@ -70,7 +70,7 @@ func BoolFromString(s string) Bool {
 // BoolFromPtr creates a new Bool that be null if b is nil.
 func BoolFromStringExist(s string, b bool) Bool {
 	if s == "" || b == false {
-		return NewBool(false, false)
+		return NewBool(false, true)
 	}
 	return NewBool(true, true)
 }
