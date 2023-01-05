@@ -27,7 +27,7 @@ func NewBool(b bool, valid bool) Bool {
 
 // BoolFrom creates a new Bool that will be null if false.
 func BoolFrom(b bool) Bool {
-	return NewBool(b, b)
+	return NewBool(b, true)
 }
 
 // BoolFromPtr creates a new Bool that be null if b is nil.
