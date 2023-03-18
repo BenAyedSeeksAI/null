@@ -164,3 +164,55 @@ func (s *Bool) OverwriteWithIfValid(st bool, v bool) {
 		s.Valid = v
 	}
 }
+
+// Add boolean operators
+// AND operation
+func (s Bool) AND(other Bool) Bool {
+	result := Bool{
+		NullBool: sql.NullBool{},
+	}
+	if s.Valid && other.Valid {
+		result.Bool = s.Bool && other.Bool
+		result.Valid = true
+		return result
+	}
+	result.Valid = false
+	return result
+}
+
+// OR operation
+func (s Bool) OR(other Bool) Bool {
+	result := Bool{
+		NullBool: sql.NullBool{},
+	}
+	if s.Valid && other.Valid {
+		result.Bool = s.Bool || other.Bool
+		result.Valid = true
+		return result
+	}
+	result.Valid = false
+	return result
+}
+
+// NON operation
+func (s *Bool) NON() {
+	if s.Valid {
+		s.Bool = !s.Bool
+	}
+}
+
+// XOR operation
+func (s Bool) XOR(other Bool) Bool {
+	result := Bool{
+		NullBool: sql.NullBool{},
+	}
+	x := s.Bool
+	y := other.Bool
+	if s.Valid && other.Valid {
+		result.Bool = (x || y) && !(x && y)
+		result.Valid = true
+		return result
+	}
+	result.Valid = false
+	return result
+}
